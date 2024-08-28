@@ -1,24 +1,31 @@
+#necessary imports
 import discord
 from discord import app_commands
 from discord.ext import commands
 import requests
 
+#Intents are a feature of Discord that tells the gateway exactly which events to send your bot.
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-TOKEN = 'MTI3NjgyMzUxMjgzNjczOTE2Mg.GQ36SP.7n059g2psKQziGTVmJUZrI901y_6s_5BxErwN0'
+#token
+TOKEN = 'Enter-Your-Toker-Here'
 
+
+#establishing connection.
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
     try:
+	#syncs number of commands defined, in this case it will be 7.
         synced = await bot.tree.sync()
         print(f'Synced {len(synced)} command(s)')
     except Exception as e:
         print(e)
 
+#slash commands can be defined by doing so, basic and rudiemntary
 @bot.tree.command(name="jok", description="Fetches a random joke")
 async def joke(interaction: discord.Interaction):
     await interaction.response.defer()
